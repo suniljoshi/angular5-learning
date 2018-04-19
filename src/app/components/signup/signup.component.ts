@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'; 
-//import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LogincommonService } from '../../services/logincommon.service'; 
-
-
+import { UserserviceService } from '../../services/userservice.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +17,8 @@ export class SignupComponent implements OnInit {
   public userdata = {
                     username:'',
                     password:'',
-                    email:''
+                    email:'',
+     id:''
                   }
   public signupFrm = {username:'',
                    password:'',
@@ -30,8 +31,7 @@ export class SignupComponent implements OnInit {
     public repassword: FormControl;
     public email: FormControl;
     
-
-  constructor(private _usersdata: LogincommonService,private router: Router) { }  
+  constructor(private _usersdata: LogincommonService,private router: Router, private toastr: ToastrService, private _userServ: UserserviceService, private spinnerService: Ng4LoadingSpinnerService) { }  
 
   ngOnInit() {
     this.createFormControls();
@@ -53,12 +53,6 @@ export class SignupComponent implements OnInit {
             this.repassword = new FormControl('', [Validators.required]); // { Validator: this.passwordConfirming});
   }
 
-  //passwordConfirming(c: AbstractControl): { invalid: boolean } {
-   // if (this.signupFrm.repassword != this.signupFrm.password) {
-     //   return { invalid: true};
-  //  }
-//}
-
   createForm() {
             this.myform = new FormGroup({
               username: this.username,
@@ -68,23 +62,20 @@ export class SignupComponent implements OnInit {
     });
   }
   signup(){
-       //this.spinnerService.show();
-        setTimeout(()=>{ 
-         // this.spinnerService.hide();
-          alert('added employee sucessfully..! please login')
-          this.users.push(this.userdata)
-       this.signupFrm = {username:'',
-                  password:'',
-                  email:'',
-                  repassword: ''};
-       this._usersdata.usersList.next(this.users);
-          this.router.navigate(['login']);
-       },1000)
-        
-  
-      
-    
-
+ this.spinnerService.show();
+     setTimeout(()=>{ 
+    this._userServ.create(this.userdata)
+    .subscribe(
+        data => {
+           this.spinnerService.hide();
+             this.toastr.success('Signed up successfully.', 'Plese login with credientials..!');
+            this.router.navigate(['/login']);
+        },
+        error => {
+           this.spinnerService.hide();
+           this.toastr.error('Error!', error);
+        });
+        },1000)
 
     }
     login(){

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'; 
-//import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { LogincommonService } from '../../services/logincommon.service'; 
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { LogincommonService } from '../../services/logincommon.service';
+import { AuthenticationService } from '../../services/authentication.service'; 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -20,19 +21,18 @@ export class LoginComponent implements OnInit {
     public username: FormControl;
     public password: FormControl;
 
+
     
-    
-  constructor(private _usersdata: LogincommonService, private router: Router) { }  
+  constructor(private _usersdata: LogincommonService, private toastr: ToastrService, private router: Router, private _authenticationService: AuthenticationService, private spinnerService: Ng4LoadingSpinnerService) { }  
   ngOnInit() {
-    document.cookie.split(";").forEach(function(c) {
-       document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
-    });
+ 
     this.createFormControls();
     this.createForm();
     this._usersdata.usersList.subscribe(res => {
       this.users = res;
       console.log(res)
    });
+   this._authenticationService.logout();
 
   }
      createFormControls() {
@@ -47,30 +47,49 @@ export class LoginComponent implements OnInit {
     });
   }
     login(){
-      //  this.spinnerService.show();
+       
        let username = this.logindata.username;
        let password = this.logindata.password;
-
-       var loginstatus = this.users.some(function(user){
-         console.log(user);
-        return user.username == username && user.password == password;
-       });
-
-
+       this.spinnerService.show();
+       
        setTimeout(()=>{ 
-          //this.spinnerService.hide();
-          
-          if(loginstatus){
-              if(username == 'admin')
-                  this.createCookie("role", "admin", 1, username)
-                  else
-                      this.createCookie("role", "user", 1, username)
-                      this.router.navigate(['dashboard']);
-          }
+      this._authenticationService.login(username, password)
+      .subscribe(
+          data => {
+            this.toastr.success('Login Sucessfully.!', 'Redirecting to dashboard page.!');
+            this.spinnerService.hide();
+            this.createCookie("role", "user", 5, username)
+            this.router.navigate(['dashboard']);
+          },
+          error => {
+             this.spinnerService.hide();
+             this.toastr.error('Error!', 'Username or password incorrect..!');
+          });
+          },1000)
+      // this.spinnerService.show();
+       //let username = this.logindata.username;
+      // let password = this.logindata.password;
 
-        else alert('Username or password incorrect..!')
+       //var loginstatus = this.users.some(function(user){
+         //console.log(user);
+        //return user.username == username && user.password == password;
+       //});
+
+
+       //setTimeout(()=>{ 
+        //  this.spinnerService.hide();
+          
+         // if(loginstatus){
+              //if(username == 'admin')
+                 // this.createCookie("role", "admin", 1, username)
+                // else
+                     // this.createCookie("role", "user", 1, username)
+                     // this.router.navigate(['dashboard']);
+         // }
+
+        //else alert('Username or password incorrect..!')
               
-       },1000)
+      // },1000)
         
     }
 

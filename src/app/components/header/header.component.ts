@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     this.username =  this._authserv.getCookie('username');
     console.log(this._authserv.getCookie('username'))
     if(this.username == ''){
-     // alert('session expired please login again.!')
+      alert('session expired please login again.!')
       this.router.navigate(['login']);
     }
 

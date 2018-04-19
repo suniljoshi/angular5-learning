@@ -4,6 +4,10 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HeaderComponent } from '../header/header.component';
 import { AuthService } from '../../services/auth.service';
+import { UserserviceService } from '../../services/userservice.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -12,8 +16,8 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent,HeaderComponent ],
-      imports:[RouterTestingModule],
-       providers:[AuthService]
+      imports:[RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
+       providers:[AuthService,UserserviceService]
     })
     .compileComponents();
   }));

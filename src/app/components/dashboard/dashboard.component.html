@@ -3,8 +3,14 @@
 <div class="main-container">
     <div class="right-container">
         <div>
-            <h2>Dashboard </h2>
-           
+            <h1>List all registered users using Mock</h1>
+            <li *ngFor="let user of users; let i = index;">
+                {{i+1}}. &nbsp;&nbsp;  Username: - {{user.username}}, &nbsp; &nbsp; Email: -  {{user.email}}
+            <a (click)="deleteUser(user.id)">Delete</a>
+        </li>
         </div>
     </div>
 </div>
+
+
+

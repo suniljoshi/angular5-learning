@@ -9,7 +9,7 @@ describe('LogincommonService', () => {
     });
   });
 
-  it('should be created', inject([LogincommonService], (service: LogincommonService) => {
+  it('Check if login service is Working or not', inject([LogincommonService], (service: LogincommonService) => {
     expect(service).toBeTruthy();
   }));
 
