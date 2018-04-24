@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="main-container">
-    <div class="right-container">
+   <!-- <div class="right-container">
         <div>
             <h1>List all registered users using Mock</h1>
             <li *ngFor="let user of users; let i = index;">
@@ -9,8 +9,97 @@
             <a (click)="deleteUser(user.id)">Delete</a>
         </li>
         </div>
+    </div> -->
+
+    <div class="right-container">
+        <div>
+            <div>
+                <h2>In web api Tutorial get heroes list</h2>
+                <input type="text" [(ngModel)]="term" class="searchinput" placeholder="Search Here...">
+                <table cellpadding="7" border="1" style="width: 100%;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th class="action-btns">Edit </th>
+                        <th class="action-btns">Delete </th>
+                    </tr>
+                    <tr *ngFor="let hero of heroes | paginate: { itemsPerPage: 10, currentPage: p } | filter:term">
+                        <td>{{hero.name}}</td>
+                        <td>{{hero.email}}</td>
+                        <td>{{hero.mobile}}</td>
+                        <td class="action-btns"> <a  (click)="getUserByid(hero.id)">Edit</a></td>
+                        <td class="action-btns"> <a  (click)="deleteUser(hero)">Delete</a></td>
+                    </tr>
+                </table>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+            
+                
+            </div>
+        </div>
     </div>
+
+    <div class="login-container">
+        <h2>{{userAction}} user</h2>
+        <form>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" value="" [(ngModel)]="createuser.name">
+              
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value="" [(ngModel)]="createuser.email">
+                
+               
+            </div>
+            <div class="form-group">
+                <label>Mobile No.</label>
+                <input type="tel" name="mobile" value="" [(ngModel)]="createuser.mobile">
+                
+               
+            </div>
+    
+            <input type="submit" value="{{userAction}} " class="submit-btn" (click)="checkAction()">
+        </form>
+    
+    
+    </div> 
 </div>
+
+<!-- <div class="example-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="mobile">
+        <mat-header-cell *matHeaderCellDef> Mobile </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.mobile}} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div> -->
+  
 
 
 

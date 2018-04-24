@@ -1,3 +1,9 @@
+h2{
+    float: left;
+    /* margin-bottom: 30px; */
+    width: 400px;
+    margin-top: 4px;
+}
 .right-container{
     padding: 20px 50px;
     h1{
@@ -9,12 +15,98 @@
         font-size: 15px;
         color: #ac5454;
         font-family: sans-serif;
-        a{
-            cursor: pointer;
-            text-decoration: underline;
-            color: blue;
-            padding: 0px 50px; 
-        }
+        
     }
 
 }
+a{
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+    padding: 0px 50px; 
+}
+
+
+.login-container {
+    text-align: center;
+    width: 400px;
+    text-transform: capitalize;
+    padding-top: 10px;
+    margin: 0 auto;
+    h2 {
+        color: #000;
+        font-family: sans-serif;
+        border-bottom: 1px dashed #b1b1b1;
+        padding: 10px;
+    }
+    .form-group {
+        width: 100%;
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 2px;
+            border: 1px solid #c2c2c2;
+        }
+        .error-msg {
+            color: red;
+            text-align: left;
+            padding: 10px 0px;
+            p{
+                padding: 0;
+                margin: 0;
+            }
+        }
+        
+    }
+    label {
+        text-align: left;
+        display: block;
+        font-size: 18px;
+        padding: 10px 0px;
+    }
+
+    .submit-btn {
+        margin-top: 30px;
+        padding: 9px 44px;
+        background: #3c3e5f;
+        color: #fff;
+        border: none;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+    .submit-btn:disabled{
+        background-color: dimgray;
+    }
+}
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+  .searchinput{
+    float: right;
+    padding: 0px 10px;
+    width: 200px;
+    margin-top: 6px;
+    height: 27px;
+    border-radius: 2px;
+    border: 1px solid #a19e9e;
+    margin-bottom: 28px;
+  }

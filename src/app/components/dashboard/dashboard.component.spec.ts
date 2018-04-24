@@ -8,6 +8,12 @@ import { UserserviceService } from '../../services/userservice.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ToastrService } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Hero } from '../../hero';
+import { HeroService } from '../../hero.service';
+import {NgxPaginationModule} from 'ngx-pagination'; 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MessageService } from '../../message.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -16,8 +22,8 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent,HeaderComponent ],
-      imports:[RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
-       providers:[AuthService,UserserviceService]
+      imports:[Ng2SearchPipeModule,NgxPaginationModule,ReactiveFormsModule,FormsModule,RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
+       providers:[AuthService,UserserviceService,HeroService,MessageService]
     })
     .compileComponents();
   }));
