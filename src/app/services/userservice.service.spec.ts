@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { inject, tick, TestBed, getTestBed, async, fakeAsync, ComponentFixture } from '@angular/core/testing';
 
 import { UserserviceService } from './userservice.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -9,66 +9,206 @@ import { JwtInterceptor } from '../interceptor/jwt.interceptor';
 import { fakeBackendProvider } from '../interceptor/fake-backend';
 import { RouterTestingModule } from '@angular/router/testing';
 import { User } from '../modals/user';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { of } from 'rxjs/observable/of';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import 'rxjs/Rx';
-//import { provide } from '@angular/core';
+import { HeaderComponent } from '../components/header/header.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../services/auth.service';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { HttpModule } from '@angular/http';
+import { constantData } from "../constants/constants";
 
 describe('UserserviceService', () => {
-  beforeEach(() => {
+  var userService;
+  let homeComponent;
+  let fixture;
+  let element;
+  let test = constantData.testing;
+  
+
+  beforeEach(async(() => {
+
+    if(test){
+      console.log('Setting static data')
+            localStorage.setItem('currentUser', JSON.stringify(constantData.testToken));
+            localStorage.setItem('users', JSON.stringify(constantData.SetUsers));
+    }
+   
+
     TestBed.configureTestingModule({
-       imports:[HttpClientTestingModule, RouterTestingModule],
-       providers: [UserserviceService, {
+       imports:[HttpClientTestingModule,HttpModule, RouterTestingModule,ToastrModule.forRoot(),Ng4LoadingSpinnerModule.forRoot()],
+
+       providers: [AuthService,ToastrService,UserserviceService, {
         provide: HTTP_INTERCEPTORS,
         useClass: JwtInterceptor,
         multi: true
-       }, fakeBackendProvider]
-    });
-  });
+       }, fakeBackendProvider],
+       declarations: [DashboardComponent,HeaderComponent]
+     }).compileComponents();
+    }));
+
+
+    beforeEach(inject([UserserviceService], s => {
+      userService = s;
+      fixture = TestBed.createComponent(DashboardComponent);
+      homeComponent = fixture.componentInstance;
+      element = fixture.nativeElement;
+    }));
+
+     
+  it('should be created', inject([UserserviceService], (service: UserserviceService) => {
+    expect(service).toBeTruthy();
+  }));
+   
+
+
+it("should call getUsers and return list of users", async(() => {
+ const userService = getTestBed().get(UserserviceService);
+  userService.getAll().subscribe(
+    users => {
+      console.log(users)
+      expect(users.length).toEqual(10);
+    }
+  ); 
+  
+}));
+
+it("Should return 1 result get user by id", async(() => {
+  const userService = getTestBed().get(UserserviceService);
+   userService.getById(4).subscribe(
+     response => {
+       console.log(response)
+       expect(response.username).toEqual('gmail');
+     }
+   ); 
+   
+ }));
+
+
+
+ it("Should Delete a result and after delete should come result should come 9 ", async(() => {
+  const userService = getTestBed().get(UserserviceService);
+   userService.delete(5).subscribe(
+     response => {
+       console.log(response)
+       expect(response).toEqual(null);
+       userService.getAll().subscribe(
+        users => {
+          console.log(users)
+          expect(users.length).toEqual(9);
+        }
+      ); 
+     }
+   ); 
+   
+ }));
+
+ it("Update a username luv to luvmathur it should come truthy", async(() => {
+    let userdata = {
+      username:'luvmathur',
+      password:'luv',
+      email:'luvmathur@intimetec.com',
+      id:4
+    }
+  const userService = getTestBed().get(UserserviceService);
+   userService.update(userdata).subscribe(
+     response => {
+       console.log(response)
+       expect(response.username).toEqual('luvmathur');
+     }
+   ); 
+   
+ }));
+ 
+ 
+
+     
+});
+
+
+
+
+
+
+/*import { inject, tick, TestBed, getTestBed, async, fakeAsync, ComponentFixture } from '@angular/core/testing';
+
+import { UserserviceService } from './userservice.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators/map';
+import { JwtInterceptor } from '../interceptor/jwt.interceptor';
+import { fakeBackendProvider } from '../interceptor/fake-backend';
+import { RouterTestingModule } from '@angular/router/testing';
+import { User } from '../modals/user';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { of } from 'rxjs/observable/of';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import 'rxjs/Rx';
+import { HeaderComponent } from '../components/header/header.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../services/auth.service';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
+
+describe('UserserviceService', () => {
+  let userService;
+  let homeComponent;
+  let fixture;
+  let element;
+
+  beforeEach(async(() => {
+
+
+   
+
+    TestBed.configureTestingModule({
+       imports:[HttpClientTestingModule, RouterTestingModule,ToastrModule.forRoot(),Ng4LoadingSpinnerModule.forRoot()],
+
+       providers: [AuthService,ToastrService,UserserviceService, {
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptor,
+        multi: true
+       }, fakeBackendProvider],
+       declarations: [DashboardComponent,HeaderComponent]
+     }).compileComponents();
+    }));
+
+
+    beforeEach(inject([UserserviceService], s => {
+      userService = s; 
+      fixture = TestBed.createComponent(DashboardComponent);
+      homeComponent = fixture.componentInstance;
+      element = fixture.nativeElement;
+    }));
+
+
+
+  it("should call getUsers and return list of users", async(() => {
+        let userServicea = fixture.debugElement.injector.get(userService);
+        const response: User[] = [];
+
+        spyOn(this.userServicea, 'getAll').and.returnValue(of(response))
+
+        homeComponent.getUsers();
+
+        fixture.detectChanges();
+        console.log(homeComponent.getUsers())
+        console.log(homeComponent.users.length)
+        expect(homeComponent.users.length).toBeGreaterThan(1)
+}));
+
+
 
    
   it('should be created', inject([UserserviceService], (service: UserserviceService) => {
     expect(service).toBeTruthy();
   }));
    
-    it('Add user for testing', inject([UserserviceService], (service: UserserviceService) => {
-     //  let service = new LogincommonService();
-       let userdata = {
-                    username:'admin1',
-                    password:'admin1',
-                    email:'admin@test.com',
-                    id:123
-                  }
-       
-     //  return service.create(userdata).subscribe(response => {
-       // console.log(response)
-   // });
-    expect(service.create(userdata)).toBeTruthy(); 
-  }));
-     it('Get an user by id', inject([UserserviceService], (service: UserserviceService) => {
-        expect(service.getById(123)).toBeTruthy();
-  }));
-   
-    it('Get all users', inject([UserserviceService], (service: UserserviceService) => {
-       //console.log(service.getAllUsers());
-   // http.getAll().subscribe(users => { 
-     //  console.log(users); 
-    //});
-      // console.log(234342423);
-       
-       //this.http.get('/api/users').then(function(res){
-         //                                       console.log(res)
-           //
-        //let service = new UserserviceService();
-    //spyOn(service.c, 'next').and.callThrough()})
-       //spyOn(service, 'c$').and.callThrough;
 
-    //service.setC('demo')
-        //service.c$.getAll().subscribe(users => {
-      //expect(users.length).toBeGreaterThan(0);
-      //expect(users).toEqual(dummyUsers);
-       expect(service.getAll()).toBeTruthy();
-    });
-       
-       
-  }));
      
-});
+}); */

@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
                     username:'',
                     password:'',
                     email:'',
-     id:''
+     id:null
                   }
   public signupFrm = {username:'',
                    password:'',

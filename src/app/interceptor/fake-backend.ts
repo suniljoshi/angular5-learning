@@ -7,14 +7,18 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
- 
+
+
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
  
-    constructor() { }
+    constructor() {     }
  
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+
+
+    // let users =  [{"username":"luv","password":"luv","email":"luv@gmail.com","id":4},{"username":"pitbull","password":"pitbull","email":"pitbull@gmail.com","id":5},{"username":"pitbull12","password":"pitbull","email":"pitbull12@gmail.com","id":6},{"username":"gmail","password":"gmail","email":"gmial@gmail.com","id":5},{"username":"sjjd","password":"111","email":"jdsjdj@gmsm.vvv","id":6},{"username":"sdfsf","password":"1212","email":"fsdfs@gsdd.sdf","id":7},{"username":"sunil","password":"sunil","email":"sunil@sunil.com","id":8},{"username":"nima","password":"nima","email":"nima@gmail.com","id":9},{"username":"sdfsdfsf","password":"1111","email":"sdfs@dsfsdf.com","id":9}];
+     let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
         return Observable.of(null).mergeMap(() => {
             if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
                 let filteredUsers = users.filter(user => {
@@ -26,8 +30,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let body = {
                         id: user.id,
                         username: user.username,
-                        firstName: user.firstName,
-                        lastName: user.lastName,
+                        password: user.password,
                         token: 'fake-jwt-token'
                     };
  
