@@ -14,15 +14,61 @@ import { HeroService } from '../../hero.service';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MessageService } from '../../message.service';
-
-describe('DashboardComponent', () => {
+import { MatTableDataSource,  MatSort, MatPaginator } from '@angular/material';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  MatAutocompleteModule,
+  MatButtonToggleModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatProgressBarModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatTooltipModule
+} from '@angular/material';
+xdescribe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent,HeaderComponent ],
-      imports:[Ng2SearchPipeModule,NgxPaginationModule,ReactiveFormsModule,FormsModule,RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
+      imports:[MatAutocompleteModule,
+  MatButtonToggleModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatProgressBarModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatTooltipModule, Ng2SearchPipeModule,NgxPaginationModule,ReactiveFormsModule,FormsModule,RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
        providers:[AuthService,UserserviceService,HeroService,MessageService]
     })
     .compileComponents();

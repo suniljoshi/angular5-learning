@@ -4,6 +4,7 @@ import { HeaderComponent } from './header.component';
 import { AuthService } from '../../services/auth.service'; 
 import { RouterTestingModule } from '@angular/router/testing';
 
+import {MatInputModule, MatTableModule,MatSortModule, MatToolbarModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
@@ -12,7 +13,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
        providers:[AuthService],
-       imports:[RouterTestingModule],
+       imports:[RouterTestingModule,MatToolbarModule],
     })
     .compileComponents();
   }));

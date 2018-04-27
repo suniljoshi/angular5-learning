@@ -8,6 +8,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
 
+import * as data from './example.json';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -16,9 +17,49 @@ export class FakeBackendInterceptor implements HttpInterceptor {
  
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-
-    // let users =  [{"username":"luv","password":"luv","email":"luv@gmail.com","id":4},{"username":"pitbull","password":"pitbull","email":"pitbull@gmail.com","id":5},{"username":"pitbull12","password":"pitbull","email":"pitbull12@gmail.com","id":6},{"username":"gmail","password":"gmail","email":"gmial@gmail.com","id":5},{"username":"sjjd","password":"111","email":"jdsjdj@gmsm.vvv","id":6},{"username":"sdfsf","password":"1212","email":"fsdfs@gsdd.sdf","id":7},{"username":"sunil","password":"sunil","email":"sunil@sunil.com","id":8},{"username":"nima","password":"nima","email":"nima@gmail.com","id":9},{"username":"sdfsdfsf","password":"1111","email":"sdfs@dsfsdf.com","id":9}];
      let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+     let appData = [
+        { id: 11, name: 'Mr. Nice' , email: 'test@gmail.com', mobile: 99956652222 },
+        { id: 12, name: 'Narco',  email: 'iiiiiii@gmail.com', mobile: 34567845645  },
+        { id: 13, name: 'Bombasto', email: 'uuuu@gmail.com', mobile: 987654333344  },
+        { id: 14, name: 'Celeritas', email: 'yyyyy@gmail.com', mobile: 99956652222  },
+        { id: 15, name: 'Magneta', email: 'rrrrr@gmail.com', mobile: 99956652222  },
+        { id: 16, name: 'RubberMan', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 17, name: 'Dynama', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 18, name: 'Dr IQ', email: 'weewewwe@gmail.com', mobile: 99956652222  },
+        { id: 19, name: 'Magma', email: 'asd@gmail.com', mobile: 99956652222  },
+        { id: 20, name: 'Tornado', email: 'okjh@gmail.com', mobile: 99956652222  },
+        { id: 21, name: 'Mr. Nice 234' , email: 'test@gmail.com', mobile: 99956652222 },
+        { id: 22, name: 'Narco 234',  email: 'iiiiiii@gmail.com', mobile: 34567845645  },
+        { id: 23, name: 'Bombasto 32423432', email: 'uuuu@gmail.com', mobile: 987654333344  },
+        { id: 24, name: 'Celeritas555', email: 'yyyyy@gmail.com', mobile: 99956652222  },
+        { id: 25, name: 'Magneta5555', email: 'rrrrr@gmail.com', mobile: 99956652222  },
+        { id: 26, name: 'RubberMan76777 5', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 27, name: 'Dynama 5', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 28, name: 'Dr IQ 5', email: 'weewewwe@gmail.com', mobile: 99956652222  },
+        { id: 29, name: 'Magma 5', email: 'asd@gmail.com', mobile: 99956652222  },
+        { id: 30, name: 'Tornado 5', email: 'okjh@gmail.com', mobile: 99956652222  },
+        { id: 31, name: 'Mr. Nice 5' , email: 'test@gmail.com', mobile: 99956652222 },
+        { id: 32, name: 'Narc 5o',  email: 'iiiiiii@gmail.com', mobile: 34567845645  },
+        { id: 33, name: 'Bomb 5asto', email: 'uuuu@gmail.com', mobile: 987654333344  },
+        { id: 34, name: 'Celeri 5tas', email: 'yyyyy@gmail.com', mobile: 99956652222  },
+        { id: 35, name: 'Magn 5eta', email: 'rrrrr@gmail.com', mobile: 99956652222  },
+        { id: 36, name: 'Rubb 4erMan', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 37, name: 'Dyna 4ma', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 38, name: 'Dr  4IQ', email: 'weewewwe@gmail.com', mobile: 99956652222  },
+        { id: 39, name: 'Mag 4ma', email: 'asd@gmail.com', mobile: 99956652222  },
+        { id: 40, name: 'Torn 4ado', email: 'okjh@gmail.com', mobile: 99956652222  },
+        { id: 41, name: 'Mr. Ni 4ce 234' , email: 'test@gmail.com', mobile: 99956652222 },
+        { id: 42, name: 'Narco 23 44',  email: 'iiiiiii@gmail.com', mobile: 34567845645  },
+        { id: 43, name: 'Bombasto 3 42423432', email: 'uuuu@gmail.com', mobile: 987654333344  },
+        { id: 44, name: 'Celeritas 4555', email: 'yyyyy@gmail.com', mobile: 99956652222  },
+        { id: 45, name: 'Magneta555 45', email: 'rrrrr@gmail.com', mobile: 99956652222  },
+        { id: 46, name: 'RubberMan7677 47', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 47, name: 'Dynama 4', email: 'weeeee@gmail.com', mobile: 99956652222  },
+        { id: 48, name: 'Dr IQ 4', email: 'weewewwe@gmail.com', mobile: 99956652222  },
+        { id: 49, name: 'Magma 4', email: 'asd@gmail.com', mobile: 99956652222  }
+      ]
+     
         return Observable.of(null).mergeMap(() => {
             if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
                 let filteredUsers = users.filter(user => {
@@ -97,6 +138,52 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return Observable.throw('Unauthorised');
                 }
             }
+           
+            // Get for server side pagination
+
+            if (request.url.includes('api/users/pagination') && request.method === 'GET') {
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                 
+                    let limit =  Number(getParameterByName('limit', request.url))
+                    let total =  Number(getParameterByName('total', request.url))
+                    let skip  =  Number(getParameterByName('skip', request.url))
+                    let keyword  =  getParameterByName('filter', request.url)
+                  
+                    let sliced = appData.splice(skip, limit);
+                    if(keyword != ''){
+                       var filteredData = appData.filter(function(user){
+                          return user.name.toLocaleLowerCase().includes(keyword)
+                       })
+                       console.log(filteredData)
+                       sliced = filteredData;
+                       
+                    }
+                   
+                    let bodyData = {
+                       total: appData.length,
+                       data:sliced,
+                       filter: keyword
+                    }
+                    
+
+                    return Observable.of(new HttpResponse({ status: 200, body: bodyData }));
+                } else {
+                    return Observable.throw('Unauthorised');
+                }
+            }
+           
+           
+              function getParameterByName(name, url) {
+                        if (!url) url = window.location.href;
+                        name = name.replace(/[\[\]]/g, "\\$&");
+                        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                            results = regex.exec(url);
+                        if (!results) return null;
+                        if (!results[2]) return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, " "));
+                    }
+           
+
 
             return next.handle(request);
              

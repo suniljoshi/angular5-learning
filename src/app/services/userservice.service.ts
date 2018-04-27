@@ -30,34 +30,9 @@ export class UserserviceService {
       return this.http.delete('/api/users/' + id);
   }
 
-  /*getActionWithParam<T>(param: any, path: string) {
-    return this.http.get(path)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  getAction<T>(path: string) {
-    return this.http.get(path)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  private extractData(res: any) {
-    if (res && res.status === 200) {
-      return res.json() || {};
-    } else {
-      return res || {};
-    }
-  }
-
-  private handleError(error: any) {
-    let unauth: Boolean = false;
-    unauth = (error.status === 401) ? true : false;
-    if (unauth === true) {
-      //location.pathname = Constants.loginPath;
-    }
-    return Observable.throw(error);
-  }*/
+  getDataServerPagination(limit, skip, total, filter) {
+    return this.http.get('/api/users/pagination/?limit='+ limit + '&skip='+skip+'&total='+ total+ '&filter='+filter);
+}
 
 }
 

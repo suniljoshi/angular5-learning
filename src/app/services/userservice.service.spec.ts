@@ -23,9 +23,9 @@ import { constantData } from "../constants/constants";
 
 export class UserServiceShouldnotTest {
 
-  run() {
+//  run() {
 
-xdescribe('UserserviceService', () => {
+describe('UserserviceService', () => {
   var userService;
   let homeComponent;
   let fixture;
@@ -132,5 +132,5 @@ it("Should return 1 result get user by id", async(() => {
      
 });
 
-}
+//}
 }

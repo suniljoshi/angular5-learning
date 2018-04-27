@@ -31,9 +31,35 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ErrorComponent } from './components/error/error.component';
-import {MatInputModule, MatTableModule, MatToolbarModule } from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatButtonToggleModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatProgressBarModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatTooltipModule
+} from '@angular/material';
+import {MatInputModule, MatTableModule,MatSortModule, MatToolbarModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { AuthService } from './services/auth.service'; 
 import { LogincommonService } from './services/logincommon.service'; 
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -44,9 +70,33 @@ import { LogincommonService } from './services/logincommon.service';
     HeaderComponent,
     ErrorComponent
   ],
-  imports: [
-     MatToolbarModule, MatInputModule, MatTableModule,
-    Ng2SearchPipeModule,
+  imports: [MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatProgressBarModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+   MatButtonModule,
+     MatToolbarModule, MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule,
+     Ng2SearchPipeModule,
     NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,

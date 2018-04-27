@@ -1,11 +1,10 @@
-
 import { inject, tick, TestBed, getTestBed, async, fakeAsync, ComponentFixture } from '@angular/core/testing';
 import { concatMap, tap, map } from 'rxjs/operators';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MessageService } from './message.service';
-  describe('HeroService core', () => {
+  describe('In memory web api testing', () => {
 
     let heroService: HeroService;
 
