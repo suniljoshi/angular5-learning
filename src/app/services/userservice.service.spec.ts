@@ -21,7 +21,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { HttpModule } from '@angular/http';
 import { constantData } from "../constants/constants";
 
-export class UserServiceShouldnotTest {
+//export class UserServiceShouldnotTest {
 
 //  run() {
 
@@ -128,9 +128,7 @@ it("Should return 1 result get user by id", async(() => {
  }));
  
  
-
-     
 });
+     
 
-//}
-}
+

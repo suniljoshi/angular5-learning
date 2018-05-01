@@ -11,7 +11,7 @@ import { MatTableDataSource,  MatSort, MatPaginator } from '@angular/material';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
 import * as Rx from 'rxjs/Rx';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,27 +43,40 @@ export class DashboardComponent implements AfterViewInit, OnInit {
    public pageLimit = [5, 10] ; 
    public filter = ''
    public displayedColumns;
+   public sortby = 'id';
 /*   public color = 'primary';
    public mode = 'Indeterminate';
    public value = 50;*/
 
-    constructor(private http: HttpClient,private heroService: HeroService, private userService: UserserviceService, private toastr: ToastrService, private route:ActivatedRoute, private router: Router) {
+    constructor( private spinnerService: Ng4LoadingSpinnerService, private http: HttpClient,private heroService: HeroService, private userService: UserserviceService, private toastr: ToastrService, private route:ActivatedRoute, private router: Router) {
         this.displayedColumns = ['id', 'name', 'email', 'mobile'];
+        
     }
  
     applyFilter(filterValue: string) {
         filterValue = filterValue.trim(); 
         filterValue = filterValue.toLowerCase();
         this.dataSource.filter = filterValue;
-        
+        console.log(this.dataSource.filteredData)
        
-       // if(this.dataSource.filteredData ==  0){
+        //if(this.dataSource.filteredData.length ==  0){
           // console.log(this.dataSource)
             this.filter = filterValue;
            this.getData(0);
-         //}
+        // }
       }
       
+      sortServerSide(param){
+          if(param ==  this.sortby){
+            param = '-'+param 
+          }
+          else if(param == this.sortby.split("-").pop()){
+            param = param
+          }
+
+          this.sortby = param;
+          this.getData(0)
+      }
     getHeroes(): void {
         this.heroService.getHeroes()
         .subscribe(heroes => this.heroes = heroes);
@@ -72,26 +85,29 @@ export class DashboardComponent implements AfterViewInit, OnInit {
 
     ngOnInit() {
         this.loadAllUsers();
+        
      
     }
 
     ngAfterViewInit() {
         setTimeout(() => {
          this.getData(0);
+     
        })
      }
 
      getData(set){
+        this.spinnerService.show();
         console.log(this.filter);
-        this.userService.getDataServerPagination(this.limit,this.skip,0, this.filter).subscribe(response => { 
+        this.userService.getDataServerPagination(this.limit,this.skip,0, this.filter, this.sortby).subscribe(response => { 
            setTimeout(() => {
             console.log(response)
-      
+            this.spinnerService.hide();
             this.dataSource.data = response.data;
             if( this.totalLength == 0){
                 this.totalLength = response.total;
             }
-              this.dataSource.sort = this.sort;
+              //this.dataSource.sort = this.sort;
 
        },2000)
            
@@ -107,12 +123,12 @@ export class DashboardComponent implements AfterViewInit, OnInit {
            console.log(1)
               this.limit = event.pageSize;
               this.skip = event.pageSize * event.pageIndex;
-              this.getData()
+              this.getData(0)
         }else{
         if(this.totalLength > this.dataSource.data.length){
             console.log(2)
              this.skip = event.pageSize * event.pageIndex;
-            this.getData()
+            this.getData(0)
           }
         }  
       }

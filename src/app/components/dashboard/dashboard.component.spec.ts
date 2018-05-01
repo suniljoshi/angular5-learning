@@ -16,6 +16,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MessageService } from '../../message.service';
 import { MatTableDataSource,  MatSort, MatPaginator } from '@angular/material';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {
   MatAutocompleteModule,
   MatButtonToggleModule,
@@ -69,7 +70,7 @@ xdescribe('DashboardComponent', () => {
   MatSnackBarModule,
   MatTabsModule,
   MatTooltipModule, Ng2SearchPipeModule,NgxPaginationModule,ReactiveFormsModule,FormsModule,RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
-       providers:[AuthService,UserserviceService,HeroService,MessageService]
+       providers:[AuthService,UserserviceService,HeroService,MessageService,Ng4LoadingSpinnerService]
     })
     .compileComponents();
   }));

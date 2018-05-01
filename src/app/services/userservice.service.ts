@@ -30,8 +30,8 @@ export class UserserviceService {
       return this.http.delete('/api/users/' + id);
   }
 
-  getDataServerPagination(limit, skip, total, filter) {
-    return this.http.get('/api/users/pagination/?limit='+ limit + '&skip='+skip+'&total='+ total+ '&filter='+filter);
+  getDataServerPagination(limit, skip, total, filter, sortby) {
+    return this.http.get('/api/users/pagination/?limit='+ limit + '&skip='+skip+'&total='+ total+ '&filter='+filter+ '&sort='+sortby);
 }
 
 }

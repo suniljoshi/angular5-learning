@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'; 
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     
   constructor(private _usersdata: LogincommonService, private toastr: ToastrService, private router: Router, private _authenticationService: AuthenticationService, private spinnerService: Ng4LoadingSpinnerService) { }  
   ngOnInit() {
- 
+    this.spinnerService.hide();
     this.createFormControls();
     this.createForm();
     this._usersdata.usersList.subscribe(res => {
@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
    this._authenticationService.logout();
 
   }
+
      createFormControls() {
             this.username = new FormControl('', Validators.required);
             this.password = new FormControl('', Validators.required);
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
           data => {
             this.toastr.success('Login Sucessfully.!', 'Redirecting to dashboard page.!');
             this.spinnerService.hide();
-            this.createCookie("role", "user", 5, username)
+            this.createCookie("role", "user", 30, username)
             this.router.navigate(['dashboard']);
           },
           error => {

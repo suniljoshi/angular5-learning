@@ -8,7 +8,6 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
 
-import * as data from './example.json';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -19,9 +18,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
      let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
      let appData = [
-        { id: 11, name: 'Mr. Nice' , email: 'test@gmail.com', mobile: 99956652222 },
-        { id: 12, name: 'Narco',  email: 'iiiiiii@gmail.com', mobile: 34567845645  },
-        { id: 13, name: 'Bombasto', email: 'uuuu@gmail.com', mobile: 987654333344  },
+        { id: 11, name: 'Ajanta' , email: 'test@gmail.com', mobile: 99956652222 },
+        { id: 12, name: 'Berkley',  email: 'iiiiiii@gmail.com', mobile: 34567845645  },
+        { id: 13, name: 'Drump', email: 'uuuu@gmail.com', mobile: 987654333344  },
         { id: 14, name: 'Celeritas', email: 'yyyyy@gmail.com', mobile: 99956652222  },
         { id: 15, name: 'Magneta', email: 'rrrrr@gmail.com', mobile: 99956652222  },
         { id: 16, name: 'RubberMan', email: 'weeeee@gmail.com', mobile: 99956652222  },
@@ -148,6 +147,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let total =  Number(getParameterByName('total', request.url))
                     let skip  =  Number(getParameterByName('skip', request.url))
                     let keyword  =  getParameterByName('filter', request.url)
+                    let sortby  =  getParameterByName('sort', request.url)
                   
                     let sliced = appData.splice(skip, limit);
                     if(keyword != ''){
@@ -158,19 +158,75 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                        sliced = filteredData;
                        
                     }
-                   
+                    if(sortby != ''){
+                        if(!sortby.toLocaleLowerCase().includes('-')){
+                        let sortedData;
+                            
+                        if(sortby == 'name' || sortby == 'email'){
+                             sortedData  = sliced.sort(function(a,b){
+                               if (a[sortby] < b[sortby])
+                               return -1;
+                             if (a[sortby] > b[sortby])
+                               return 1;
+                             return 0;
+                            });
+                        }
+                        else{
+                             sortedData  = sliced.sort(function(a,b){
+                                return a[sortby] - b[sortby]
+                            });
+                        }
+                       
+                        sliced = sortedData
+                    }
+
+
+                        
+                        if(sortby.toLocaleLowerCase().includes('-')){
+                            let sortbynagative = sortby.split("-").pop();
+                            let sortedData;
+                            
+                            if(sortbynagative == 'name' || sortbynagative == 'email'){
+                                 sortedData  = sliced.sort(function(a,b){
+                                    if (a[sortbynagative] > b[sortbynagative])
+                                    return -1;
+                                  if (a[sortbynagative] < b[sortbynagative])
+                                    return 1;
+                                  return 0;
+                                });
+                            }
+                            else{
+                                 sortedData  = sliced.sort(function(a,b){
+                                    return b[sortbynagative] - a[sortbynagative]
+                                });
+                            }
+                           
+                            sliced = sortedData
+                        }
+                    }
+                    
+
+
                     let bodyData = {
                        total: appData.length,
                        data:sliced,
-                       filter: keyword
+                       filter: keyword,
+                       sortby : sortby
                     }
+                  
                     
+
+
 
                     return Observable.of(new HttpResponse({ status: 200, body: bodyData }));
                 } else {
                     return Observable.throw('Unauthorised');
                 }
             }
+           
+
+      
+             
            
            
               function getParameterByName(name, url) {
