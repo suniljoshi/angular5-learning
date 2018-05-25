@@ -1,14 +1,9 @@
-<!-- <ul class="header">
-    <li class="pull-right" routerLink="">Logout</li>
-    <li class="username ">Welcome {{username}} !</li>
-</ul> -->
-
 <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>Login App</span>
   
       <span class="example-spacer"></span>
-      
+            <button class="twitter-button" (click)="gotoLiveapis()" mat-button>Live Apis</button>
       <button class="logout-button" routerLink=""  mat-button>Logout</button>
     </mat-toolbar-row>
   </mat-toolbar>

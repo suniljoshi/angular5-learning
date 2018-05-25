@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'
 
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService {    
 
  constructor(private http: HttpClient) { }
  

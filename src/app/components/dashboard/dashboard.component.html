@@ -1,86 +1,13 @@
 <app-header></app-header> 
 <div class="main-container">
-   <!-- <div class="right-container">
-        <div>
-            <h1>List all registered users using Mock</h1>
-            <li *ngFor="let user of users; let i = index;">
-                {{i+1}}. &nbsp;&nbsp;  Username: - {{user.username}}, &nbsp; &nbsp; Email: -  {{user.email}}
-            <a (click)="deleteUser(user.id)">Delete</a>
-        </li>
-        </div>
-    </div> -->
-
-    <!-- <div class="right-container">
-        <div>
-            <div>
-                <h2>In web api Tutorial get heroes list</h2>
-                <input type="text" [(ngModel)]="term" class="searchinput" placeholder="Search Here...">
-                <table cellpadding="7" border="1" style="width: 100%;">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th class="action-btns">Edit </th>
-                        <th class="action-btns">Delete </th>
-                    </tr>
-                    <tr *ngFor="let hero of heroes | paginate: { itemsPerPage: 10, currentPage: p } | filter:term">
-                        <td>{{hero.name}}</td>
-                        <td>{{hero.email}}</td>
-                        <td>{{hero.mobile}}</td>
-                        <td class="action-btns"> <a  (click)="getUserByid(hero.id)">Edit</a></td>
-                        <td class="action-btns"> <a  (click)="deleteUser(hero)">Delete</a></td>
-                    </tr>
-                </table>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-
-            
-                
-            </div>
-        </div>
-    </div>
-
-    <div class="login-container">
-        <h2>{{userAction}} user</h2>
-        <form>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" name="name" value="" [(ngModel)]="createuser.name">
-              
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" value="" [(ngModel)]="createuser.email">
-                
-               
-            </div>
-            <div class="form-group">
-                <label>Mobile No.</label>
-                <input type="tel" name="mobile" value="" [(ngModel)]="createuser.mobile">
-                
-               
-            </div>
-    
-            <input type="submit" value="{{userAction}} " class="submit-btn" (click)="checkAction()">
-        </form>
-    
-    
-    </div>  -->
+  
 </div>
-
-
-
 <div class="example-container mat-elevation-z8">
     <div class="example-header">
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
       </div>
-    <!-- <mat-progress-spinner
-        class="example-margin"
-        [color]="color"
-        [mode]="mode"
-        [value]="value">
-    </mat-progress-spinner>-->
   
         <mat-table #table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
             <ng-container matColumnDef="id">
@@ -111,53 +38,6 @@
                    (page)="changePage($event)">
     </mat-paginator>
   </div> 
-
-  <!--<div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource">
-
-      <ng-container matColumnDef="fullname">
-        <mat-header-cell *matHeaderCellDef> Fullname   </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.fullname}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="type">
-        <mat-header-cell *matHeaderCellDef> Type</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="category">
-        <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="brand">
-        <mat-header-cell *matHeaderCellDef> BRAND </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.brand }} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="model">
-        <mat-header-cell *matHeaderCellDef> MODEl NO.</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.model }} </mat-cell>
-      </ng-container>
-  
-
-      <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.date | date :'fullDate'}}<br/> <strong>{{element.date | date :'HH:mm'}}</strong></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef>Request Status </mat-header-cell>
-        <mat-cell *matCellDef="let element"> </mat-cell>
-      </ng-container>
-  
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  
-    <mat-paginator #paginator [length]="totalLength"
-                   [pageSize]="limit" 
-                   [pageSizeOptions]="pageLimit"                 
-                   (page)="changePage($event)">
-    </mat-paginator>
-  </div>-->
 
 
 

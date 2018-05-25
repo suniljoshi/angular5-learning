@@ -10,21 +10,22 @@ import { fakeBackendProvider } from '../interceptor/fake-backend';
 import { RouterTestingModule } from '@angular/router/testing';
 import { User } from '../modals/user';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { of } from 'rxjs/observable/of';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
-import 'rxjs/Rx';
 import { HeaderComponent } from '../components/header/header.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
+import { HeroService }  from '../hero.service';
+import { MessageService }  from '../message.service';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { HttpModule } from '@angular/http';
 import { constantData } from "../constants/constants";
-
-//export class UserServiceShouldnotTest {
-
-//  run() {
-
+import { Usersdata } from './userdata';
+import { MatFormFieldModule } from '@angular/material';
+import {MatInputModule, MatTableModule,MatSortModule, MatToolbarModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
+import { of } from 'rxjs/observable/of';
+import 'rxjs/Rx';
+import {MatPaginatorModule} from '@angular/material/paginator';
 describe('UserserviceService', () => {
   var userService;
   let homeComponent;
@@ -43,9 +44,9 @@ describe('UserserviceService', () => {
    
 
     TestBed.configureTestingModule({
-       imports:[HttpClientTestingModule,HttpModule, RouterTestingModule,ToastrModule.forRoot(),Ng4LoadingSpinnerModule.forRoot()],
+       imports:[HttpClientTestingModule,HttpModule,MatInputModule, MatTableModule,MatSortModule, MatToolbarModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule,MatFormFieldModule, RouterTestingModule,ToastrModule.forRoot(),Ng4LoadingSpinnerModule.forRoot()],
 
-       providers: [AuthService,ToastrService,UserserviceService, {
+       providers: [AuthService,ToastrService,UserserviceService, HeroService, MessageService, {
         provide: HTTP_INTERCEPTORS,
         useClass: JwtInterceptor,
         multi: true

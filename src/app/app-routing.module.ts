@@ -7,6 +7,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ErrorComponent } from './components/error/error.component';
+import { RouteGuardForViewDashboard } from './services/routeguard.service';
+import { LiveComponent } from './components/liveapi/live.component';
 
 const routes: Routes = [
  {
@@ -15,21 +17,22 @@ const routes: Routes = [
  },
  {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
 },
+   {
+     path: 'live',
+     component: LiveComponent,
+     canActivate: [RouteGuardForViewDashboard]
+   },
      {
      path: 'dashboard',
-     component: DashboardComponent
+     component: DashboardComponent,
+     canActivate: [RouteGuardForViewDashboard]
  },
  {
     path: 'signup',
     component: SignupComponent
 },
-
-  { path: '',
-    component: LoginComponent,
-    pathMatch: 'full' },
-
   { path: '**', 
     component: ErrorComponent }
 ];

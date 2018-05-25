@@ -34,8 +34,8 @@
           Password does not match</div>
     </div>
 
-      <input type="submit" value="Sign Up " class="submit-btn" [disabled]="!myform.valid && signupFrm.repassword != userdata.password" (click)="signup()">
-      <input type="button" value="Go to login page" class="submit-btn" (click)="login()">
+      <input type="submit" value="Sign Up" class="submit-btn signup-button " [disabled]="!myform.valid" (click)="signup()">
+      <input type="button" value="Go to login page" class="submit-btn  login-button" (click)="login()">
   </form>
 
 

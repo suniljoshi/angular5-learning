@@ -31,7 +31,10 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ErrorComponent } from './components/error/error.component';
-import {
+import { MatFormFieldModule } from '@angular/material';
+import { LiveComponent } from './components/liveapi/live.component';
+import { Liveapiservice } from './services/liveapi.service';
+ import {
   MatAutocompleteModule,
   MatButtonToggleModule,
   MatCheckboxModule,
@@ -59,7 +62,7 @@ import {MatInputModule, MatTableModule,MatSortModule, MatToolbarModule, MatCardM
 import { AuthService } from './services/auth.service'; 
 import { LogincommonService } from './services/logincommon.service'; 
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { RouteGuardForViewDashboard } from './services/routeguard.service';
 
 @NgModule({
   declarations: [
@@ -68,9 +71,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SignupComponent,
     DashboardComponent,
     HeaderComponent,
-    ErrorComponent
+    ErrorComponent,
+    LiveComponent
   ],
-  imports: [MatAutocompleteModule,
+  imports: [ MatFormFieldModule,
+    MatAutocompleteModule,
     MatButtonToggleModule,
     MatCheckboxModule,
     MatChipsModule,
@@ -113,7 +118,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     )
      
   ],
-  providers: [HeroService,MessageService, AuthService,LogincommonService,AuthenticationService, UserserviceService,
+  providers: [Liveapiservice, RouteGuardForViewDashboard, HeroService,MessageService, AuthService,LogincommonService,AuthenticationService, UserserviceService,
     {
         provide: HTTP_INTERCEPTORS,
         useClass: JwtInterceptor,

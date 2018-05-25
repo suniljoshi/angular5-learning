@@ -44,26 +44,19 @@ export class DashboardComponent implements AfterViewInit, OnInit {
    public filter = ''
    public displayedColumns;
    public sortby = 'id';
-/*   public color = 'primary';
-   public mode = 'Indeterminate';
-   public value = 50;*/
 
     constructor( private spinnerService: Ng4LoadingSpinnerService, private http: HttpClient,private heroService: HeroService, private userService: UserserviceService, private toastr: ToastrService, private route:ActivatedRoute, private router: Router) {
         this.displayedColumns = ['id', 'name', 'email', 'mobile'];
         
     }
- 
+
     applyFilter(filterValue: string) {
         filterValue = filterValue.trim(); 
         filterValue = filterValue.toLowerCase();
         this.dataSource.filter = filterValue;
         console.log(this.dataSource.filteredData)
-       
-        //if(this.dataSource.filteredData.length ==  0){
-          // console.log(this.dataSource)
             this.filter = filterValue;
            this.getData(0);
-        // }
       }
       
       sortServerSide(param){
@@ -84,9 +77,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
 
 
     ngOnInit() {
-        this.loadAllUsers();
-        
-     
+        this.loadAllUsers();     
     }
 
     ngAfterViewInit() {
@@ -99,15 +90,17 @@ export class DashboardComponent implements AfterViewInit, OnInit {
      getData(set){
         this.spinnerService.show();
         console.log(this.filter);
-        this.userService.getDataServerPagination(this.limit,this.skip,0, this.filter, this.sortby).subscribe(response => { 
+        this.userService.getDataServerPagination(this.limit,this.skip,0, this.filter, this.sortby).subscribe(Usersdata => { 
            setTimeout(() => {
-            console.log(response)
+              if(Usersdata){
+              if(Usersdata.data != undefined){
             this.spinnerService.hide();
-            this.dataSource.data = response.data;
+            this.dataSource.data = Usersdata.data;
             if( this.totalLength == 0){
-                this.totalLength = response.total;
+                this.totalLength = Usersdata.total;
             }
-              //this.dataSource.sort = this.sort;
+              }
+           }
 
        },2000)
            
@@ -166,7 +159,6 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     }
 
     editUser(){
-        console.log(this.createuser);
         this.heroService.updateHero(this.createuser)
         .subscribe(hero => {
             console.log(hero)

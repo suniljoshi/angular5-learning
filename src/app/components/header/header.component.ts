@@ -4,13 +4,14 @@ import { AuthService } from '../../services/auth.service';
 import { MatTableDataSource,  MatSort, MatPaginator } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private username;
+  public username;
   constructor(private toastr: ToastrService, private _authserv: AuthService, private route:ActivatedRoute, private router: Router, private spinnerService: Ng4LoadingSpinnerService) { 
   }
 
@@ -23,5 +24,9 @@ export class HeaderComponent implements OnInit {
     }
 
   }
+   
+ /*  gotoLiveapis(){
+    //  this.router.navigate(['live']);
+   }*/
     
 }

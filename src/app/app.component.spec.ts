@@ -27,5 +27,21 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('app');
   }));
+   
+   
+   it('should have router outlet', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('router-outlet')).not.toBe(null);
+  }));
+   
+   it('should have ng4 loading component', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const ng4loading = fixture.debugElement.nativeElement;
+    expect(ng4loading.querySelector('ng4-loading-spinner')).not.toBe(null);
+  }));
+      
 
 });

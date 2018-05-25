@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-     createFormControls() {
+   createFormControls() {
             this.username = new FormControl('', Validators.required);
             this.password = new FormControl('', Validators.required);
   }
@@ -67,30 +67,6 @@ export class LoginComponent implements OnInit {
              this.toastr.error('Error!', 'Username or password incorrect..!');
           });
           },1000)
-      // this.spinnerService.show();
-       //let username = this.logindata.username;
-      // let password = this.logindata.password;
-
-       //var loginstatus = this.users.some(function(user){
-         //console.log(user);
-        //return user.username == username && user.password == password;
-       //});
-
-
-       //setTimeout(()=>{ 
-        //  this.spinnerService.hide();
-          
-         // if(loginstatus){
-              //if(username == 'admin')
-                 // this.createCookie("role", "admin", 1, username)
-                // else
-                     // this.createCookie("role", "user", 1, username)
-                     // this.router.navigate(['dashboard']);
-         // }
-
-        //else alert('Username or password incorrect..!')
-              
-      // },1000)
         
     }
 

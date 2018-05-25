@@ -14,11 +14,11 @@ import { ToastrService } from 'ngx-toastr';
 export class SignupComponent implements OnInit {
 
  public users;
-  public userdata = {
+ public userdata = {
                     username:'',
                     password:'',
                     email:'',
-     id:null
+                    id:null
                   }
   public signupFrm = {username:'',
                    password:'',
@@ -62,20 +62,20 @@ export class SignupComponent implements OnInit {
     });
   }
   signup(){
- this.spinnerService.show();
-     setTimeout(()=>{ 
-    this._userServ.create(this.userdata)
-    .subscribe(
-        data => {
-           this.spinnerService.hide();
-             this.toastr.success('Signed up successfully.', 'Plese login with credientials..!');
-            this.router.navigate(['/login']);
-        },
-        error => {
-           this.spinnerService.hide();
-           this.toastr.error('Error!', error);
-        });
-        },1000)
+    this.spinnerService.show();
+        setTimeout(()=>{ 
+       this._userServ.create(this.userdata)
+       .subscribe(
+           data => {
+              this.spinnerService.hide();
+                this.toastr.success('Signed up successfully.', 'Plese login with credientials..!');
+               this.router.navigate(['/login']);
+           },
+           error => {
+              this.spinnerService.hide();
+              this.toastr.error('Error!', error);
+           });
+           },1000)
 
     }
     login(){

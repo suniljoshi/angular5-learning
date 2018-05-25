@@ -4,6 +4,7 @@ import { User } from '../modals/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Usersdata } from './userdata';
 
 @Injectable()
 export class UserserviceService {
@@ -30,9 +31,16 @@ export class UserserviceService {
       return this.http.delete('/api/users/' + id);
   }
 
-  getDataServerPagination(limit, skip, total, filter, sortby) {
-    return this.http.get('/api/users/pagination/?limit='+ limit + '&skip='+skip+'&total='+ total+ '&filter='+filter+ '&sort='+sortby);
+  getDataServerPagination(limit, skip, total, filter, sortby){
+    return this.http.get<Usersdata>('/api/users/pagination/?limit='+ limit + '&skip='+skip+'&total='+ total+ '&filter='+filter+ '&sort='+sortby);
 }
 
+ isLoggedIn(){
+      if(localStorage.getItem('currentUser') != null)
+         return true
+      else 
+         return false
+   }
+   
 }
 
