@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { HeaderComponent } from './header.component';
 import { AuthService } from '../../services/auth.service'; 
 import { RouterTestingModule } from '@angular/router/testing';
@@ -38,6 +39,18 @@ describe('HeaderComponent', () => {
     component.ngOnInit()
     let username = component.username;
     expect(username).toBe('sunil joshi');
+      
+  });
+   
+   it('Title of header should be available', () => {
+    let headertitle = fixture.debugElement.nativeElement.querySelector('.headertitle');
+    expect(headertitle).toBeTruthy();
+      
+  });
+   
+    it('Title of header should be Login App', () => {
+    let headertitle = fixture.debugElement.nativeElement.querySelector('.headertitle');
+    expect(headertitle.innerText).toBe('Login App');
       
   });
    

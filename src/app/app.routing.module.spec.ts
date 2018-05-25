@@ -2,6 +2,7 @@ import {Location} from "@angular/common";
 import {TestBed, fakeAsync, tick} from '@angular/core/testing';
 import {RouterTestingModule} from "@angular/router/testing";
 import {Router} from "@angular/router";
+import { SpyLocation }         from '@angular/common/testing';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -98,7 +99,7 @@ it('navigate to login redirects you to /login', fakeAsync(() => {
    
   }));
 
-/*  it('can navigate to login (fakeAsync/tick)', fakeAsync(() => {
+/*it('navigate to "login" takes you to /login', () => {
     router.navigate(['login']).then(() => {
         expect(location.path()).toBe('/login');
     });

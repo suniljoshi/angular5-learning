@@ -12,4 +12,9 @@ describe('AuthService', () => {
   it('should be created', inject([AuthService], (service: AuthService) => {
     expect(service).toBeTruthy();
   }));
+   
+   
+   it("Get cookie function should return '' if i want to get unknown user details ", inject([AuthService], (service: AuthService) => {
+    expect(service.getCookie('xyz')).toEqual('');
+  }));
 });

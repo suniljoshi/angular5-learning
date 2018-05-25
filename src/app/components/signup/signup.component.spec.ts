@@ -105,6 +105,20 @@ describe('SignupComponent', () => {
      expect(signupBtn.disabled).toBeFalsy();
        
    });
+   
+  it('Check all form labels value should proper', () => {
+     let username = fixture.debugElement.nativeElement.querySelector('.username');
+     let emailid = fixture.debugElement.nativeElement.querySelector('.emailid');
+     let password = fixture.debugElement.nativeElement.querySelector('.password');
+     let repassword = fixture.debugElement.nativeElement.querySelector('.repassword');
+     
+     expect(username.innerText).toEqual('Username'); 
+     expect(emailid.innerText).toEqual('Email Id'); 
+     expect(password.innerText).toEqual('Password'); 
+     expect(repassword.innerText).toEqual('Re- Password'); 
+   });
+   
+   
 
   it('email field validation test', () => {
     let errors = {};

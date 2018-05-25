@@ -2,12 +2,12 @@
   <h2>User Signup</h2>
   <form novalidate [formGroup]="myform">
       <div class="form-group">
-          <label>Username</label>
+          <label class="username">Username</label>
           <input type="text" name="username" value="" [(ngModel)]="userdata.username" formControlName="username">
           <div class="error-msg" *ngIf="username.invalid && username.dirty"> Username Required </div>
       </div>
        <div class="form-group">
-          <label>Email Id</label>
+          <label class="emailid">Email Id</label>
           <input type="email" name="firstname" value="" [(ngModel)]="userdata.email" formControlName="email">
            <div class="error-msg" *ngIf="email.errors && (email.dirty || email.touched)">
             <p *ngIf="email.errors.required">Email required</p>
@@ -16,7 +16,7 @@
            </div>
       </div>
       <div class="form-group">
-          <label>Password</label>
+          <label class="password">Password</label>
           <input type="password" name="password" value="" [(ngModel)]="userdata.password" formControlName="password">
           
           <div class="error-msg" *ngIf="password.errors && (password.dirty || password.touched)">
@@ -24,7 +24,7 @@
   </div>
       </div>
       <div class="form-group">
-        <label>Re- Password</label>
+        <label class="repassword">Re- Password</label>
         <input type="password" name="repassword" value="" [(ngModel)]="signupFrm.repassword" formControlName="repassword">
         
         <div class="error-msg" *ngIf="repassword.errors && (repassword.dirty || repassword.touched)">

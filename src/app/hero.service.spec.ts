@@ -25,7 +25,6 @@ import { MessageService } from './message.service';
         heroes => {
           expect(heroes.length).toBeGreaterThan(20, 'should have heroes');
         },
-       // failure
         );
     }));
 
@@ -34,7 +33,6 @@ import { MessageService } from './message.service';
       heroService.getHero(10)
         .subscribe(
         hero => {
-          // console.log(hero);
           expect(hero.name).toBe('Windstorm');
         },
         () => fail('getHero failed')
@@ -51,33 +49,16 @@ import { MessageService } from './message.service';
           expect(err.status).toBe(404, 'should have 404 status');
         }
         );
-    }));
-
-    // it('can add a hero', async(() => {
-    //   heroService.addHero('FunkyBob').pipe(
-    //     tap(hero => {
-    //       // console.log(hero);
-    //       expect(hero.name).toBe('FunkyBob');
-    //     }),
-    //     // Get the new hero by its generated id
-    //     concatMap(hero => heroService.getHero(hero.id)),
-    //   ).subscribe(
-    //     hero => {
-    //       expect(hero.name).toBe('FunkyBob');
-    //     },
-    //    // err => failure('re-fetch of new hero failed')
-    //     );
-    // }), 10000);
+    }))
 
     it('can delete a user', async(() => {
       const heroService = getTestBed().get(HeroService);
       const id = 10;
       heroService.deleteHero(id)
         .subscribe(
-        (_: {}) => {
-          expect(_).toBeDefined();
+        (_data: {}) => {
+          expect(_data).toBeDefined();
         },
-       // failure
         );
     }));
 
@@ -86,10 +67,9 @@ import { MessageService } from './message.service';
       const id = 123456;
       heroService.deleteHero(id)
         .subscribe(
-        (_: {}) => {
-          expect(_).toBeDefined();
+        (_data: {}) => {
+          expect(_data).toBeDefined();
         },
-      //  failure
         );
     }));
 
@@ -100,7 +80,6 @@ import { MessageService } from './message.service';
         (heroes: Hero[]) => {
           expect(heroes.length).toBe(3, 'should find 3 heroes with letter "a"');
         },
-        //failure
       );
     }));
 
@@ -109,7 +88,6 @@ import { MessageService } from './message.service';
       const id = 11;
       heroService.getHero(id).pipe(
         concatMap(hero => {
-         // hero.name = 'Narco';
           return heroService.updateHero(hero);
         }),
         concatMap(() => {
@@ -120,7 +98,7 @@ import { MessageService } from './message.service';
           console.log(hero);
           expect(hero.name).toBe('Narco');
         },
-        err => fail('re-fetch of updated hero failed')
+        err => fail('re-fetch of updated user failed')
         );
     }), 10000);
 
